@@ -136,6 +136,8 @@ class Device(object):
 
     def _timebase_options_are_impossible(self, options):
         device_max_samples_possible = self.driver.MAX_MEMORY
+        # for the purposes of this logic, device_max_samples can be divided by oversample.
+        device_max_samples_possible /= options.oversample
         if options.no_of_samples is not None:
             if options.no_of_samples > device_max_samples_possible:
                 return True

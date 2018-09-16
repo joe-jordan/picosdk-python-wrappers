@@ -108,7 +108,7 @@ class TimebaseValidationTest(unittest.TestCase):
         actual_timebase = 0.004
         required_max_samples = int(math.ceil(request.min_collection_time / actual_timebase))
         response = TimebaseInfo(timebase_id=7,
-                                time_interval=0.004,
+                                time_interval=actual_timebase,
                                 time_units=None,
                                 max_samples=required_max_samples+1,
                                 segment_id=0)
@@ -122,10 +122,9 @@ class TimebaseValidationTest(unittest.TestCase):
         actual_timebase = 0.004
         required_max_samples = int(math.ceil(request.min_collection_time / actual_timebase))
         response = TimebaseInfo(timebase_id=7,
-                                time_interval=0.004,
+                                time_interval=actual_timebase,
                                 time_units=None,
                                 max_samples=required_max_samples-5,
                                 segment_id=0)
 
         self.assertFalse(Device._validate_timebase(request, response))
-
